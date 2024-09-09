@@ -1,0 +1,90 @@
+PROGRAM Prog1
+#info= QLD
+BOF
+
+
+(**)
+
+SOR  [0,1] (**) (**)  XIC  [1,0] (*BOOL_IN_13*) (*Factory I/O (Running)*)  
+ BST  XIC  [2,0] (*BOOL_IN_8*) (*Start*)
+   NXB  
+ BST  XIC  [2,1] (*BOOL_OUT_0*) (*Conveyor Entry*)
+   NXB  
+ BST  XIC  [2,2] (*BOOL_OUT_5*) (*Conveyor Left*)
+   NXB  XIC  [2,3] (*BOOL_OUT_6*) (*Conveyor Right*)
+ BND
+
+ BND
+
+ BND
+  XIO  [3,0] (*BOOL_IN_2*) (*Pallet Sensor*)  XIO  [4,0] (*BOOL_IN_3*) (*Load Capactive Sensor*)  XIC  [5,0] (*BOOL_IN_6*) (*At Right entry sensor*)  XIC  [6,0] (*BOOL_IN_4*) (*At Left entry sensor*)  
+ BST  OTE  [7,0] (*BOOL_OUT_0*) (*Conveyor Entry*)
+   NXB  OTE  [7,1] (*BOOL_OUT_7*) (*Start Light*)
+ BND
+
+EOR [8,0]
+
+
+(**)
+
+SOR  [0,6] (**) (**)  XIC  [1,0] (*BOOL_IN_2*) (*Pallet Sensor*)  XIO  [2,0] (*BOOL_IN_3*) (*Load Capactive Sensor*)  OTE  [3,0] (*BOOL_OUT_1*) (*Load*)
+EOR [4,0]
+
+
+(**)
+
+SOR  [0,8] (**) (**)  
+ BST  XIC  [1,0] (*BOOL_IN_2*) (*Pallet Sensor*)  XIC  [2,0] (*BOOL_IN_1*) (*Low Sensor*)  XIO  [3,0] (*BOOL_IN_0*) (*High Sensor*)
+   NXB  XIC  [1,1] (*small_Box_Low*) (**)  XIO  [2,1] (*Large_box_High*) (**)
+ BND
+  XIC  [4,0] (*BOOL_IN_4*) (*At Left entry sensor*)  OTE  [5,0] (*small_Box_Low*) (**)
+EOR [6,0]
+
+
+(**)
+
+SOR  [0,11] (**) (**)  XIC  [1,0] (*small_Box_Low*) (**)  XIO  [2,0] (*Large_box_High*) (**)  XIC  [3,0] (*BOOL_IN_3*) (*Load Capactive Sensor*)  OTE  [4,0] (*BOOL_OUT_3*) (*Transf. Left*)
+EOR [5,0]
+
+
+(**)
+
+SOR  [0,13] (**) (**)  
+ BST  XIO  [1,0] (*BOOL_IN_4*) (*At Left entry sensor*)
+   NXB  XIC  [1,1] (*BOOL_OUT_5*) (*Conveyor Left*)
+ BND
+  XIC  [2,0] (*BOOL_IN_5*) (*At Left exit sensor*)  OTE  [3,0] (*BOOL_OUT_5*) (*Conveyor Left*)
+EOR [4,0]
+
+
+(**)
+
+SOR  [0,16] (**) (**)  
+ BST  XIC  [1,0] (*BOOL_IN_2*) (*Pallet Sensor*)  XIC  [2,0] (*BOOL_IN_1*) (*Low Sensor*)  XIC  [3,0] (*BOOL_IN_0*) (*High Sensor*)
+   NXB  
+ BST  XIC  [1,1] (*BOOL_IN_2*) (*Pallet Sensor*)  XIC  [2,1] (*BOOL_IN_14*) (*Very High Sensor*)
+   NXB  XIC  [1,2] (*Large_box_High*) (**)  XIO  [2,2] (*small_Box_Low*) (**)
+ BND
+
+ BND
+  XIC  [4,0] (*BOOL_IN_6*) (*At Right entry sensor*)  OTE  [5,0] (*Large_box_High*) (**)
+EOR [6,0]
+
+
+(**)
+
+SOR  [0,20] (**) (**)  XIC  [1,0] (*Large_box_High*) (**)  XIO  [2,0] (*small_Box_Low*) (**)  XIC  [3,0] (*BOOL_IN_3*) (*Load Capactive Sensor*)  OTE  [4,0] (*BOOL_OUT_4*) (*Transf. Right*)
+EOR [5,0]
+
+
+(**)
+
+SOR  [0,22] (**) (**)  
+ BST  XIO  [1,0] (*BOOL_IN_6*) (*At Right entry sensor*)
+   NXB  XIC  [1,1] (*BOOL_OUT_6*) (*Conveyor Right*)
+ BND
+  XIC  [2,0] (*BOOL_IN_7*) (*At right exit sensor*)  OTE  [3,0] (*BOOL_OUT_6*) (*Conveyor Right*)
+EOR [4,0]
+EOF
+#end_info
+END_PROGRAM
